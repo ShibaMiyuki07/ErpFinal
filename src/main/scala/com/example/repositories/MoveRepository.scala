@@ -1,11 +1,14 @@
 package com.example.repositories
 
 import com.example.models.Move
+import com.example.models.tables.Moves
+import com.example.repositories.traits.TRepository
 import slick.jdbc.JdbcBackend.Database
 import slick.lifted.TableQuery
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
+import slick.jdbc.PostgresProfile.api._
 @Singleton
 class MoveRepository @Inject() (db : Database)(implicit ec : ExecutionContext) extends TRepository[Move]{
 

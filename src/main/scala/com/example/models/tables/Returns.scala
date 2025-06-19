@@ -5,7 +5,7 @@ import slick.jdbc.PostgresProfile.Table
 import slick.lifted.Tag
 
 import java.sql.Timestamp
-
+import slick.jdbc.PostgresProfile.api._
 class Returns (tag:Tag) extends Table[Return](tag,"returns"){
   def returnId = column[Int]("returnid",O.AutoInc,O.AutoInc)
   def commandId = column[Int]("commandid")

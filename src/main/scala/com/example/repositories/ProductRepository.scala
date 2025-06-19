@@ -1,14 +1,17 @@
 package com.example.repositories
 
 import com.example.models
+import com.example.models.tables.Products
+import com.example.repositories.traits.TRepository
 import slick.jdbc.JdbcBackend.Database
 import slick.lifted.TableQuery
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
+import slick.jdbc.PostgresProfile.api._
 
 @Singleton
-class ProductRepository @Inject(db : Database)(implicit ec : ExecutionContext) extends TRepository[com.example.models.Product]{
+class ProductRepository @Inject()(db : Database)(implicit ec : ExecutionContext) extends TRepository[com.example.models.Product]{
   private val products = TableQuery[Products]
 
   def create(product: com.example.models.Product) : Future[com.example.models.Product] = {

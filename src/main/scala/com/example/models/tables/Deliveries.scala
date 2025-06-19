@@ -3,7 +3,7 @@ package com.example.models.tables
 import com.example.models.Delivery
 import slick.jdbc.PostgresProfile.Table
 import slick.lifted.Tag
-
+import slick.jdbc.PostgresProfile.api._
 import java.sql.Timestamp
 
 class Deliveries(tag : Tag) extends Table[Delivery](tag,"deliveries"){

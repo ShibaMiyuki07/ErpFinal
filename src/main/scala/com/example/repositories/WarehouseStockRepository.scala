@@ -1,11 +1,14 @@
 package com.example.repositories
 
 import com.example.models.WarehouseStock
+import com.example.models.tables.WarehouseStocks
+import com.example.repositories.traits.TRepository
 import slick.jdbc.JdbcBackend.Database
 import slick.lifted.TableQuery
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
+import slick.jdbc.PostgresProfile.api._
 @Singleton
 class WarehouseStockRepository @Inject() (db : Database)(implicit ec : ExecutionContext) extends TRepository[WarehouseStock]{
 

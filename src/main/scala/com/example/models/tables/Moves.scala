@@ -5,6 +5,7 @@ import slick.jdbc.PostgresProfile.Table
 import slick.lifted.Tag
 
 import java.sql.Timestamp
+import slick.jdbc.PostgresProfile.api._
 
 class Moves(tag : Tag) extends Table[Move](tag,"moves") {
   def moveId = column[Int]("moveid",O.PrimaryKey,O.AutoInc)

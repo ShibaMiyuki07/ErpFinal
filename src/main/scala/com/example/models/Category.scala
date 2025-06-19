@@ -1,5 +1,7 @@
 package com.example.models
 
+import com.example.utils.XmlReadable
+
 import scala.xml.NodeSeq
 
 case class Category

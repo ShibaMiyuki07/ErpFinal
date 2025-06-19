@@ -1,9 +1,11 @@
 package com.example.repositories
 
 import com.example.models.Category
+import com.example.models.tables.Categories
+import com.example.repositories.traits.TRepository
 import slick.jdbc.JdbcBackend.Database
 import slick.lifted.TableQuery
-
+import slick.jdbc.PostgresProfile.api._
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
 

@@ -1,12 +1,14 @@
 package com.example.repositories
 
 import com.example.models.Client
+import com.example.models.tables.Clients
+import com.example.repositories.traits.TRepository
 import slick.jdbc.JdbcBackend.Database
 import slick.lifted.TableQuery
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
-
+import slick.jdbc.PostgresProfile.api._
 @Singleton
 class ClientRepository @Inject()(db : Database)(implicit ec : ExecutionContext) extends TRepository[Client]{
   private val clients = TableQuery[Clients]

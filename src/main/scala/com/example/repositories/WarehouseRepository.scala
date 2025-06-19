@@ -1,13 +1,15 @@
 package com.example.repositories
 
 import com.example.models.Warehouse
+import com.example.models.tables.Warehouses
+import com.example.repositories.traits.TRepository
 import slick.jdbc.JdbcBackend.Database
 import slick.lifted.TableQuery
 
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
-
-class WarehouseRepository @Inject(db : Database)(implicit ec : ExecutionContext) extends TRepository[Warehouse]{
+import slick.jdbc.PostgresProfile.api._
+class WarehouseRepository @Inject()(db : Database)(implicit ec : ExecutionContext) extends TRepository[Warehouse]{
   private val warehouses = TableQuery[Warehouses]
 
   override def create(warehouse: Warehouse) : Future[Warehouse] = {

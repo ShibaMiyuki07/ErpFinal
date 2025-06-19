@@ -2,8 +2,8 @@ package com.example.models.tables
 
 import com.example.models.Command
 import slick.jdbc.PostgresProfile.Table
-import slick.lifted.Tag
-
+import slick.lifted.{TableQuery, Tag}
+import slick.jdbc.PostgresProfile.api._
 import java.sql.Timestamp
 
 class Commands (tag : Tag) extends Table[Command](tag,"commands"){
@@ -15,6 +15,6 @@ class Commands (tag : Tag) extends Table[Command](tag,"commands"){
   def totalPrice = column[BigDecimal]("totalamount")
   def typeCommand = column[String]("typecommand")
 
-  def client = foreignKey("client_fk",clientId,TableQuery[Clients])
+  //def client = foreignKey("client_fk",clientId,TableQuery[Clients])
   def * = (commandId.?,clientId,providerId,commandDate,status,totalPrice,typeCommand).mapTo[Command]
 }

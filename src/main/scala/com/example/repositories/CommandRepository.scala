@@ -1,11 +1,14 @@
 package com.example.repositories
 
 import com.example.models.Command
+import com.example.models.tables.Commands
+import com.example.repositories.traits.TRepository
 import slick.jdbc.JdbcBackend.Database
 import slick.lifted.TableQuery
 
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
+import slick.jdbc.PostgresProfile.api._
 @Singleton
 class CommandRepository @Inject()(db : Database)(implicit ec : ExecutionContext) extends TRepository[Command]{
   private val commands = TableQuery[Commands]
