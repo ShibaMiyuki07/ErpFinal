@@ -1,12 +1,14 @@
 package com.example
 
-import com.example.routes.Routes
+import com.example.routes.{AllRoutes, Routes}
 import org.apache.pekko
 import pekko.actor.typed.ActorSystem
 import pekko.actor.typed.scaladsl.Behaviors
 import pekko.http.scaladsl.Http
 import pekko.http.scaladsl.server.Route
 
+import java.util.concurrent.Executors
+import scala.concurrent.ExecutionContext
 import scala.util.Failure
 import scala.util.Success
 
@@ -30,9 +32,12 @@ object QuickstartApp {
   //#start-http-server
   def main(args: Array[String]): Unit = {
     //#server-bootstrapping
-    val rootBehavior = Behaviors.setup[Nothing] { context =>
+    val dbEc = ExecutionContext.fromExecutor(Executors.newFixedThreadPool(4))
 
-      startHttpServer(new Routes(Nil).getRoutes)(context.system)
+    implicit val ec: ExecutionContext = dbEc
+    val rootBehavior = Behaviors.setup[Nothing] { context =>
+      implicit val system: pekko.actor.ActorSystem = pekko.actor.ActorSystem("excel-upload")
+      startHttpServer(new Routes(new AllRoutes().allControllers).getRoutes)(context.system)
 
       Behaviors.empty
     }
