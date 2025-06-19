@@ -6,7 +6,7 @@ import com.example.repositories.WarehouseRepository
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 
-class WarehouseService @Inject(warehouseRepo : WarehouseRepository)(implicit ec : ExecutionContext){
+class WarehouseService @Inject()(warehouseRepo : WarehouseRepository)(implicit ec : ExecutionContext){
   def createWarehouse(warehouse: Warehouse) : Future[Warehouse] = {
     warehouseRepo.create(warehouse)
   }

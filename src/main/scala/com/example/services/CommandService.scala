@@ -2,8 +2,9 @@ package com.example.services
 
 import com.example.models.Command
 import com.example.repositories.{CommandProductRepository, CommandRepository}
+import slick.dbio.DBIO
 import slick.jdbc.JdbcBackend.Database
-
+import slick.jdbc.PostgresProfile.api._
 import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
 

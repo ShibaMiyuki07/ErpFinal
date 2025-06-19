@@ -10,6 +10,7 @@ import spray.json.{DefaultJsonProtocol, RootJsonFormat}
 import scala.concurrent.ExecutionContext
 import scala.util.{Failure, Success}
 import com.example.formats.TimestampFormat._
+import org.apache.pekko.http.scaladsl.model.StatusCodes.{BadRequest, Created, InternalServerError, NoContent, OK}
 
 class CommandRoutes(commandService : CommandService)(implicit ec : ExecutionContext) extends SprayJsonSupport with DefaultJsonProtocol{
 

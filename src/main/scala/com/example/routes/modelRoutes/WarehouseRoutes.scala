@@ -1,12 +1,17 @@
 package com.example.routes.modelRoutes
 
 import com.example.models.Warehouse
-import spray.json.RootJsonFormat
+import com.example.services.WarehouseService
+import org.apache.pekko.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
+import org.apache.pekko.http.scaladsl.model.StatusCodes.{BadRequest, InternalServerError, NoContent}
+import org.apache.pekko.http.scaladsl.server.Directives._
+import org.apache.pekko.http.scaladsl.server.Route
+import spray.json.{DefaultJsonProtocol, RootJsonFormat}
 
 import scala.concurrent.ExecutionContext
 import scala.util.{Failure, Success}
 
-class WarehouseRoutes(warehouseService: WarehouseService)(implicit ec : ExecutionContext) extends SprayJsonSupport{
+class WarehouseRoutes(warehouseService: WarehouseService)(implicit ec : ExecutionContext) extends SprayJsonSupport with DefaultJsonProtocol{
   implicit val warehouseFormat : RootJsonFormat[Warehouse] = jsonFormat4(Warehouse.apply)
   implicit val warehousesFormat : RootJsonFormat[List[Warehouse]] = listFormat(warehouseFormat)
 

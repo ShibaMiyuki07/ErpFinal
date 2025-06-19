@@ -1,11 +1,18 @@
 package com.example.routes.modelRoutes
 
 import com.example.models.Delivery
-import spray.json.RootJsonFormat
+import com.example.services.DeliveryService
+import org.apache.pekko.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
+import org.apache.pekko.http.scaladsl.server.Directives._
+import org.apache.pekko.http.scaladsl.server.Route
+import spray.json.{DefaultJsonProtocol, RootJsonFormat}
+import com.example.formats.TimestampFormat._
+import org.apache.pekko.http.scaladsl.model.StatusCodes.{BadRequest, InternalServerError, NoContent}
 
 import scala.concurrent.ExecutionContext
+import scala.util.{Failure, Success}
 
-class DeliveryRoutes(deliveryService: DeliveryService)(implicit ec: ExecutionContext) extends SprayJsonSupport{
+class DeliveryRoutes(deliveryService: DeliveryService)(implicit ec: ExecutionContext) extends SprayJsonSupport with DefaultJsonProtocol{
   implicit val deliveryFormat : RootJsonFormat[Delivery] = jsonFormat5(Delivery.apply)
   implicit val deliveriesFormat : RootJsonFormat[List[Delivery]] = listFormat(deliveryFormat)
 

@@ -3,7 +3,7 @@ package com.example.services
 import com.example.models.{Command, CommandProduct}
 import com.example.repositories.{CommandProductRepository, CommandRepository, ProductRepository}
 import slick.jdbc.JdbcBackend.Database
-
+import slick.jdbc.PostgresProfile.api._
 import javax.inject.Inject
 import scala.concurrent.{ExecutionContext, Future}
 

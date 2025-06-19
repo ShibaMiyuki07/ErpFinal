@@ -7,7 +7,7 @@ import scala.collection.mutable.ListBuffer
 import scala.concurrent.{ExecutionContext, Future}
 
 @Singleton
-class ProductService @Inject(productRepo : ProductRepository)(implicit  ec : ExecutionContext) {
+class ProductService @Inject()(productRepo : ProductRepository)(implicit  ec : ExecutionContext) {
 
   def createProduct(product: com.example.models.Product ) : Future[com.example.models.Product] = {
     productRepo.create(product)
