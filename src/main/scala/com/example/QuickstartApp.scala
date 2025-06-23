@@ -2,7 +2,6 @@ package com.example
 
 import com.example.routes.{AllRoutes, Routes}
 import org.apache.pekko
-import org.apache.pekko.actor
 import pekko.actor.typed.ActorSystem
 import pekko.actor.typed.scaladsl.Behaviors
 import pekko.http.scaladsl.Http
@@ -20,7 +19,7 @@ object QuickstartApp {
     // Pekko HTTP still needs a classic ActorSystem to start
     import system.executionContext
 
-    val futureBinding = Http().newServerAt("localhost", 8080).bind(routes)
+    val futureBinding = Http().newServerAt("0.0.0.0", 8080).bind(routes)
     futureBinding.onComplete {
       case Success(binding) =>
         val address = binding.localAddress
@@ -37,7 +36,7 @@ object QuickstartApp {
     implicit val ec: ExecutionContext = dbEc
     //#server-bootstrapping
     val rootBehavior = Behaviors.setup[Nothing] { context =>
-      implicit val system : pekko.actor.ActorSystem = pekko.actor.ActorSystem("")
+      implicit val system : pekko.actor.ActorSystem = pekko.actor.ActorSystem("system")
       startHttpServer(new Routes(new AllRoutes().getAllRoutes).getRoutes)(context.system)
 
       Behaviors.empty
