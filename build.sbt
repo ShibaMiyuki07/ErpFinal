@@ -19,9 +19,8 @@ lazy val root = (project in file(".")).
       "org.apache.pekko" %% "pekko-http-spray-json"     % pekkoHttpVersion,
       "org.apache.pekko" %% "pekko-actor-typed"         % pekkoVersion,
       "org.apache.pekko" %% "pekko-stream"              % pekkoVersion,
-      "org.apache.pekko" %% "pekko-http-cors" % pekkoHttpVersion,
       "ch.qos.logback"    % "logback-classic"           % "1.5.18",
-
+      "ch.megard" %% "pekko-http-cors" % "1.0.0",
       "com.typesafe.slick" %% "slick" % "3.6.1",
       "com.typesafe.slick" %% "slick-hikaricp" % "3.6.1",
       "org.postgresql" % "postgresql" % "42.7.7",
