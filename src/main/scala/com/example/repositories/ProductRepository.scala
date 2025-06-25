@@ -10,6 +10,8 @@ import javax.inject.{Inject, Singleton}
 import scala.concurrent.{ExecutionContext, Future}
 import slick.jdbc.PostgresProfile.api._
 
+import scala.util.Try
+
 @Singleton
 class ProductRepository @Inject()(db : Database)(implicit ec : ExecutionContext) extends TRepository[com.example.models.Product]{
   private val products = TableQuery[Products]
@@ -41,4 +43,25 @@ class ProductRepository @Inject()(db : Database)(implicit ec : ExecutionContext)
   override def delete(id: Int): Future[Int] = {
     db.run(products.filter(_.productId === id).delete)
   }
+
+  def insertExcel(list : List[Map[String,String]]): Unit = {
+    var productList : List[models.Product] = List()
+    list.foreach(products =>{
+      val product = models.Product(
+        productId = None,
+        productName = products.getOrElse("productName", ""),
+        price = BigDecimal.apply(products.getOrElse("Price", "0")),
+        pictures = products.getOrElse("Pictures", ""),
+        description = products.getOrElse("Description", ""),
+        remain = BigDecimal.apply(products.getOrElse("Remain", "0")).toInt,
+        minStock = BigDecimal.apply(products.getOrElse("minStock", "0")).toInt
+      )
+      productList = productList :+ product
+    })
+
+    db.run(products ++= productList)
+    println("Executed")
+  }
+
+
 }

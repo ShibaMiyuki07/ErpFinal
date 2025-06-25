@@ -3,6 +3,7 @@ package com.example.routes
 import com.example.databases.PostgresDatabase.db
 import com.example.repositories.{CategoryRepository, ClientRepository, CommandProductRepository, CommandRepository, DeliveryRepository, MoveRepository, ProductCategoryRepository, ProductRepository, ProviderRepository, ReturnRepository, WarehouseRepository, WarehouseStockRepository}
 import com.example.routes.modelRoutes.{CategoryRoutes, ClientRoutes, CommandProductRoutes, CommandRoutes, DeliveryRoutes, MoveRoutes, ProductCategoryRoutes, ProductRoutes, ProviderRoutes, ReturnRoutes, WarehouseRoutes}
+import com.example.routes.utilsRoutes.ExcelRoutes
 import com.example.services.{CategoryService, ClientService, CommandProductService, CommandService, DeliveryService, MoveService, ProductCategoryService, ProductService, ProviderService, ReturnService, WarehouseService}
 import org.apache.pekko.actor.ActorSystem
 import org.apache.pekko.http.scaladsl.server.Route
@@ -39,6 +40,8 @@ class AllRoutes(implicit val ec : ExecutionContext,implicit val system : ActorSy
     //val returnRoutes = new ReturnRoutes(new ReturnService(returnRepository))
     val warehouseRoutes = new WarehouseRoutes(new WarehouseService(warehouseRepository))
 
+    val excelRoutes = new ExcelRoutes(productRepository)
+
     List(
       categoryRoutes.routes,
       clientRoutes.routes,
@@ -48,7 +51,8 @@ class AllRoutes(implicit val ec : ExecutionContext,implicit val system : ActorSy
       moveRoutes.routes,
       productRoutes.routes,
       providerRoutes.routes,
-      warehouseRoutes.routes
+      warehouseRoutes.routes,
+      excelRoutes.routes
     )
   }
 }
